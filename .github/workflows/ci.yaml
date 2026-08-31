@@ -91,7 +91,7 @@ jobs:
             
             aws lambda create-function \
               --function-name ${{ env.LAMBDA_NAME }} \
-              --role arn:aws:iam::096966628706:role/service-role/calculator-app-role-cnpkrehb \
+              --role arn:aws:iam::096966628706:role/calculator-app-role-cnpkrehb \
               --runtime python3.13 \
               --handler lambda_function.lambda_handler \
               --zip-file fileb://function.zip
