@@ -86,6 +86,9 @@ jobs:
 
             echo "${{ env.LAMBDA_NAME }} lambda doesn't exist, creating"
 
+            # Allow time for IAM role/policy propagation before creation
+            sleep 10
+            
             aws lambda create-function \
               --function-name ${{ env.LAMBDA_NAME }} \
               --role arn:aws:iam::096966628706:role/service-role/calculator-app-role-cnpkrehb \
