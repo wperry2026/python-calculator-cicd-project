@@ -102,11 +102,8 @@ jobs:
         run: |
           if aws lambda get-function-url-config \
             --function-name ${{ env.LAMBDA_NAME }} >/dev/null 2>&1; then
-          
-          echo "Function URL already exists, updating..."
-          aws lambda update-function-url-config \
-            --function-name ${{ env.LAMBDA_NAME }} \
-            --auth-type NONE
+          echo "Function URL already exists. No action taken."
+          exit 0   
               
               else
 
