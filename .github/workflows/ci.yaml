@@ -104,10 +104,9 @@ jobs:
             --function-name ${{ env.LAMBDA_NAME }} >/dev/null 2>&1; then
           echo "Function URL already exists. No action taken."
           exit 0   
-              
-              else
+          fi
 
-            echo "URL doesn't exist, creating"
+          echo "URL doesn't exist, creating"
 
             aws lambda create-function-url-config \
               --function-name ${{ env.LAMBDA_NAME }} \
