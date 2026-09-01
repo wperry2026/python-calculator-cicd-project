@@ -24,7 +24,7 @@ def power(a, b):
 
 
 def lambda_handler(event, context):
-    # Extract body depending on source (Function URL / API Gateway vs. Direct Console Test)
+    # Extract body depending on source
     if "body" in event:
         if isinstance(event["body"], str):
             body = json.loads(event["body"])
@@ -44,7 +44,7 @@ def lambda_handler(event, context):
             "statusCode": 400,
             "body": json.dumps(
                 {
-                    "error": "Missing required fields. Please provide 'operation', 'a', and 'b'."
+                    "error": "Missing required fields"
                 }
             ),
         }
