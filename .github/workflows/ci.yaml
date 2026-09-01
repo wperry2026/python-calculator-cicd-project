@@ -100,10 +100,10 @@ jobs:
 
       - name: Create function URL
         run: |
-          if aws lambda get-function-url-config \
-            --function-name ${{ env.LAMBDA_NAME }} >/dev/null 2>&1; then
+          # Temporarily disable set -e or assign to a variable
+          if EX_URL=$(aws lambda get-function-url-config --function-name ${{ env.LAMBDA_NAME }} 2>&1); then
           echo "Function URL already exists. No action taken."
-          exit 0   
+          exit 0
           fi
 
           echo "URL doesn't exist, creating"
