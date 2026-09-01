@@ -100,8 +100,15 @@ jobs:
 
       - name: Create function URL
         run: |
-          if ! aws lambda get-function-url-config \
+          if aws lambda get-function-url-config \
             --function-name ${{ env.LAMBDA_NAME }} >/dev/null 2>&1; then
+          
+          echo "Function URL already exists, updating..."
+          aws lambda update-function-url-config \
+            --function-name ${{ env.LAMBDA_NAME }} \
+            --auth-type NONE
+              
+              else
 
             echo "URL doesn't exist, creating"
 
@@ -122,12 +129,5 @@ jobs:
               --action lambda:InvokeFunction \
               --principal "*" \
               --invoked-via-function-url
-
-          else
-
-            echo "URL exists"
-
-            aws lambda get-function-url-config \
-              --function-name ${{ env.LAMBDA_NAME }}
 
           fi
